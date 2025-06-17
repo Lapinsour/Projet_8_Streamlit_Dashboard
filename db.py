@@ -6,7 +6,7 @@ import requests
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamviz
-import ps
+import os
 
 df = pd.read_csv("df_sample_full.csv")
 all_id = sorted(df['SK_ID_CURR'].unique())

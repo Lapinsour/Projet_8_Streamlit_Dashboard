@@ -68,17 +68,20 @@ def get_prediction(test_sample_dict):
         return None
 
 
-# Menu déroulant pour sélectionner le SK_ID_CURR
-sk_id_curr = st.selectbox("Sélectionnez le SK_ID_CURR du client", all_id )
 
-# Rechercher la ligne correspondant à SK_ID_CURR
-test_sample = df[df['SK_ID_CURR'] == sk_id_curr].copy()
-
-# Enlever la colonne 'TARGET' et nettoyer la ligne
-test_sample = test_sample.drop('TARGET', axis=1)
-test_sample.replace([np.nan, np.inf, -np.inf], 0, inplace=True)
 
 if page == "Prédiction" :
+
+    st.title("PREDICTION POUR UN CLIENT")
+    # Menu déroulant pour sélectionner le SK_ID_CURR
+    sk_id_curr = st.selectbox("Sélectionnez le SK_ID_CURR du client", all_id )
+    
+    # Rechercher la ligne correspondant à SK_ID_CURR
+    test_sample = df[df['SK_ID_CURR'] == sk_id_curr].copy()
+    
+    # Enlever la colonne 'TARGET' et nettoyer la ligne
+    test_sample = test_sample.drop('TARGET', axis=1)
+    test_sample.replace([np.nan, np.inf, -np.inf], 0, inplace=True)
 
     
 
@@ -192,6 +195,17 @@ if page == "Prédiction" :
 
 
 if page == "Distribution comparée des clients fiables et défaillants":
+
+    st.title("COMPARAISON D'UN CLIENT")
+    # Menu déroulant pour sélectionner le SK_ID_CURR
+    sk_id_curr = st.selectbox("Sélectionnez le SK_ID_CURR du client", all_id )
+    
+    # Rechercher la ligne correspondant à SK_ID_CURR
+    test_sample = df[df['SK_ID_CURR'] == sk_id_curr].copy()
+    
+    # Enlever la colonne 'TARGET' et nettoyer la ligne
+    test_sample = test_sample.drop('TARGET', axis=1)
+    test_sample.replace([np.nan, np.inf, -np.inf], 0, inplace=True)
     
 
     selected_row = df[df["SK_ID_CURR"] == sk_id_curr].copy().drop("Unnamed: 0",axis=1)

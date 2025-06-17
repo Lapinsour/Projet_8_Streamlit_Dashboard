@@ -6,6 +6,7 @@ import requests
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamviz
+import ps
 
 df = pd.read_csv("df_sample_full.csv")
 all_id = sorted(df['SK_ID_CURR'].unique())
@@ -21,7 +22,22 @@ df_1 = df[df["TARGET"] == 1]
 features = [col for col in df_w_target if col not in cols_exclues] #Pour éviter d'afficher la distribution de la colonne TARGET
 
 df_shap_all = pd.read_csv('shap_summary_all.csv')
-df_shap_obs = pd.read_csv('shap_values_all_data.csv')
+
+
+
+# Liste et trie les fichiers par ordre alphabétique
+parts = sorted([f for f in os.listdir() if f.startswith("all_shap_")])
+
+# Concatène les DataFrames
+dfs = []
+for i, part in enumerate(parts):
+    if i == 0:
+        dfs.append(pd.read_csv(part))  # avec l'en-tête
+    else:
+        dfs.append(pd.read_csv(part, header=None, skiprows=1))  # sans l'en-tête
+
+# Fusion
+df_shap_obs = pd.concat(dfs, ignore_index=True)
 
 seuil = 0.5
 
